@@ -1,0 +1,39 @@
+.carouselContainer {
+  padding: 1rem 2rem;
+}
+
+.slide {
+  padding: 0 10px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+
+/* Garante que os slides não se sobreponham */
+.slick-slide > div {
+  width: 100%;
+}
+
+/* Corrige overflow */
+.slick-slider {
+  width: 25% !important; /* força largura fixa para cada slide */
+  padding-right: 1rem; /* espaçamento entre slides */
+  box-sizing: border-box; /* para padding não estourar largura */
+}
+
+/* Estilização das setas */
+.slick-prev:before,
+.slick-next:before {
+  color: white;
+  font-size: 30px;
+}
+
+.slick-prev {
+  left: -35px;
+  z-index: 1;
+}
+
+.slick-next {
+  right: -35px;
+  z-index: 1;
+}

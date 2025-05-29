@@ -1,0 +1,94 @@
+.card {
+  border: 3px solid; /* A cor vem inline via style */
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #111;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+}
+
+.video {
+  position: relative;
+  padding-top: 56.25%; /* 16:9 aspect ratio */
+  width: 100%;
+  overflow: hidden;
+}
+
+.video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 0.5rem;
+  background-color: #222;
+  color: white;
+}
+
+.iconText {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.iconText img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; 
+}
+
+.modalContent {
+  position: relative;
+  width: 90vw;
+  height: 90vh;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+.modalCloseButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.video iframe {
+  flex-grow: 1;
+}
+
+.favorito {
+  fill: #e00; }

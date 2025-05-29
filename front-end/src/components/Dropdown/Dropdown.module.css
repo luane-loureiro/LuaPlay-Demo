@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: #fff;
+}
+
+.container label {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.container select {
+  padding: 1em;
+  border-radius: 10px;
+  border: 3px solid #262626;
+  background-color: #191919;
+  color: #a5a5a5;
+  font-size: 16px;
+  font-family: "Source Sans Pro", sans-serif;
+  transition: border-color 0.3s, color 0.3s, background-color 0.3s;
+}
+
+.container select:focus {
+  outline: none;
+  border-color: #2271d1;
+  color: #2271d1;
+  background-color: transparent;
+  box-shadow: none;
+}

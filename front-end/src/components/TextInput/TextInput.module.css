@@ -1,0 +1,48 @@
+.container {
+  display: block;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: #fff;
+  padding: 1rem;
+}
+
+label {
+  display: block;
+  text-align: left;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+input {
+  width: 95%;
+  padding: 0.5rem;
+  display: block;
+  align-self: center;
+  border: none;
+  border-radius: 0.5px;
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  background-color: #191919;
+  color: #a5a5a5;
+  transition: border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+}
+
+input:focus {
+  outline: 2px solid #e50914;
+}
+
+/* Estilo para input com erro */
+.errorInput {
+  border: 2px solid #e50914; 
+  background-color: #2a2a2a; 
+  color: #f5a6a6; 
+}
+
+/* Mensagem de erro visível abaixo do campo */
+.errorMessage {
+  color: #e50914; 
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+  font-weight: 600;
+  display: block;
+}

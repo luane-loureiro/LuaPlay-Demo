@@ -1,0 +1,45 @@
+/* Button.module.css */
+
+/* Estilos base do botão genérico */
+.button {
+  padding: 14px;
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  color: white;
+  font-family: Roboto, sans-serif;
+  display: inline-block;
+  text-align: center;
+}
+
+/* Estilo padrão (exemplo: vermelho Netflix) */
+.button.default {
+  background: #e50914;
+  width: 100%;
+  margin-top: 16px;
+}
+
+.button.default:hover {
+  background: #f40612;
+}
+
+/* Estilo para botão da playlist (maior e com borda arredondada maior) */
+.button.playlist {
+  height: 70px;
+  width: 430px;
+  border-radius: 1rem;
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 1.5rem;
+  padding: 10px 20px;
+  margin: 0; /* remover margem padrão */
+  /* a cor do background será controlada via style inline */
+  transition: background-color 0.3s ease;
+}
+
+.button.playlist:hover {
+  filter: brightness(0.9); /* efeito hover simples */
+}

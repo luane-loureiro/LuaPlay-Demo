@@ -1,0 +1,46 @@
+.formContainer {
+  display: flex;
+  flex-direction: row;
+  padding-top: 3rem;
+  gap: 60px;
+}
+
+.columnGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.sectionTitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
+.sectionTitle hr {
+  background-color: #262626;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  height: 3px;
+  border: 0;
+}
+
+.sectionTitle h3 {
+  display: flex;
+  align-items: center;
+  width: 322px;
+  height: 75px;
+  font-family: 'SourceSansPro', sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
