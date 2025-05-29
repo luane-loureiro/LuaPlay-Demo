@@ -2,6 +2,8 @@ import { API_URL } from './config';  // <-- IMPORTAÇÃO ESSENCIAL
 
 export async function fetchWithAuth(endpoint, options = {}, token, logout) {
   const fullUrl = `${API_URL}${endpoint}`;
+  console.log("🚀 AQUI!!!!! [fetchWithAuth] Full URL:", fullUrl); // <-- AQUI
+
   const headers = {
     ...(options.headers || {}),
   };

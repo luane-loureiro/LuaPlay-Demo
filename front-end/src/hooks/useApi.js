@@ -17,7 +17,7 @@ export function useApi() {
     updateMedia: (title, updates) =>
       mediaService.updateMedia(title, updates, token, logout),
 
-    toggleFavoriteMedia: (id) =>
-      mediaService.toggleFavoriteMedia(id, token, logout),
+toggleFavoriteMedia: (id, newFavoriteValue) =>
+  mediaService.toggleFavoriteMediaApi(id, newFavoriteValue, token, logout),
   };
 }

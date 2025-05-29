@@ -40,19 +40,27 @@ const Media = ({
 }) => {
   const [duration, setDuration] = useState(null);
   const [isFavorite, setIsFavorite] = useState(favorite);
+  const [loadingFavorite, setLoadingFavorite] = useState(false);
 
   const iconClass = classNames({
     [styles.favorito]: isFavorite,
   });
 
-  const handleFavoriteClick = () => {
-    setIsFavorite((prev) => {
-      const newVal = !prev;
-      if (onFavorite) onFavorite(id, newVal);
-      return newVal;
-    });
+  const handleFavoriteClick = async () => {
+    setLoadingFavorite(true);
+    try {
+      const newVal = !isFavorite;
+      setIsFavorite(newVal);
+      if (onFavorite) {
+        await onFavorite(id, newVal);
+      }
+    } catch (err) {
+      // Reverte em caso de erro
+      setIsFavorite((prev) => !prev);
+    } finally {
+      setLoadingFavorite(false);
+    }
   };
-
 
   const getYoutubeId = (u) => {
     try {
@@ -113,34 +121,37 @@ const Media = ({
 
       <div className={styles.details}>
         <h3 className={styles.title}>{title}</h3>
-        {description && <p className={styles.description}>{description}</p>}
-        {duration && <p className={styles.duration}>Duração: {duration}</p>}
-
         <div className={styles.buttons}>
           <Button
+            variant="icon"
             onClick={onDelete}
             className={styles.iconText}
             data-testid={`delete-button-${id}`}
             aria-label="Deletar mídia"
           >
-            <FaTrash /> <span>Deletar</span>
+            <FaTrash />
           </Button>
 
           <Button
+            variant="icon"
             onClick={onEdit}
             className={styles.iconText}
             data-testid={`edit-button-${id}`}
             aria-label="Editar mídia"
           >
-            <FaPen /> <span>Editar</span>
+            <FaPen />
           </Button>
 
           <Button
+            variant="icon"
             aria-label="Adicionar aos favoritos"
             onClick={handleFavoriteClick}
             type="button"
+            disabled={loadingFavorite}
           >
-            {isFavorite ? (
+            {loadingFavorite ? (
+              <span className={styles.spinner} />
+            ) : isFavorite ? (
               <FaHeart data-testid="favorite-icon" className={iconClass} />
             ) : (
               <FaRegHeart data-testid="favorite-icon" className={iconClass} />

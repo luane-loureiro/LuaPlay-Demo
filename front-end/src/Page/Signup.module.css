@@ -5,6 +5,7 @@
   align-items: center;
   height: 100vh;
   background-color: #141414;
+
 }
 
 .form {
@@ -15,53 +16,11 @@
   max-width: 400px;
 }
 
-.title {
-  color: #fff;
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 20px;
-}
 
 .subtitle {
   color: #aaa;
   text-align: center;
-  margin-bottom: 20px;
-}
-
-.label {
-  color: #fff;
-  margin-bottom: 8px;
-  display: block;
-}
-
-.input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #333;
-  border-radius: 4px;
-  background-color: #333;
-  color: #fff;
-}
-
-.input:focus {
-  border-color: #e50914;
-  outline: none;
-}
-
-.button {
-  width: 100%;
-  padding: 10px;
-  background-color: #e50914;
-  border: none;
-  border-radius: 4px;
-  color: #fff;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.button:hover {
-  background-color: #f40612;
+  margin: 2rem 0 2rem 0;
 }
 
 .footerText {
@@ -76,7 +35,7 @@
   text-decoration: underline;
 }
 
-.logo h2 {
+.logo {
   display: flex;
   align-items: center;
   text-transform: uppercase;
@@ -84,4 +43,21 @@
   margin: 0;
   font-size: 3rem;
   color: #f40612;
+}
+
+hr{
+  border: solid .15rem #f40612;
+  width: 40%;
+}
+
+.inputBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 0;
+  margin: 0;
+}
+
+.button{
+  width: 93%;
 }

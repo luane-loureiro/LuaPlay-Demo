@@ -1,26 +1,28 @@
+const jwt = require('jsonwebtoken');
+const User = require('../models/User');
 
-module.exports = function (req, res, next) {
+module.exports = async (req, res, next) => {
   try {
+
     const authHeader = req.headers.authorization;
-    if (!authHeader) {
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return res.status(401).json({ message: 'Token não fornecido' });
     }
 
     const token = authHeader.split(' ')[1];
-    if (!token || token === 'invalid') {
-      return res.status(401).json({ message: 'Token inválido' });
+
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    const user = await User.findById(decoded.id).select('-password');
+    if (!user) {
+      return res.status(401).json({ message: 'Usuário não encontrado' });
     }
 
-    // Simulação: pega user do header pra teste
-    if (req.headers['x-user-id']) {
-      req.user = { id: req.headers['x-user-id'] };
-    } else {
-      req.user = { id: 'defaultUserId' };
-    }
-
+    req.user = user;
     next();
-  } catch (error) {
-    // Qualquer erro retorna 401, evitando 500
-    return res.status(401).json({ message: 'Token inválido' });
+  } catch (err) {
+    console.error('Erro no auth middleware:', err);
+    return res.status(401).json({ message: 'Token inválido ou expirado' });
   }
 };

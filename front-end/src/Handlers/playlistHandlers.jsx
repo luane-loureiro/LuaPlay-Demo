@@ -86,7 +86,8 @@ export async function handleConfirmAddMediaToPlaylist(
   setMedias,
   setShowAddMediaModal,
   setPlaylistToAddMedia,
-  addMediaToPlaylist
+  addMediaToPlaylist,
+  reloadMedias  // adiciona aqui
 ) {
   console.log("=== DEBUG - handleConfirmAddMediaToPlaylist ===");
   console.log("Playlist recebida:", playlist);
@@ -119,9 +120,9 @@ export async function handleConfirmAddMediaToPlaylist(
   console.log("Body final enviado para o back:", body);
 
   try {
-    // Enviar o body completo para o service
-    const newMedia = await addMediaToPlaylist(body, token, logout);
-    setMedias(prev => [...prev, newMedia]);
+    await addMediaToPlaylist(body, token, logout);
+    // Recarrega as mídias do backend para atualizar a lista
+    await reloadMedias();
   } catch (e) {
     console.error("Erro ao adicionar mídia:", e);
     alert("Erro ao adicionar mídia");

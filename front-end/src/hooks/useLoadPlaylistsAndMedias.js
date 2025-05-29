@@ -25,7 +25,6 @@ export function useLoadPlaylistsAndMedias(token, logout, navigate) {
 
         const all = [];
         for (const pl of formatted) {
-          // Passar pl.name aqui, pois a API espera nome da playlist na URL
           const md = await fetchMediasByPlaylist(pl.name, token, logout);
 
           if (Array.isArray(md)) {
@@ -36,8 +35,8 @@ export function useLoadPlaylistsAndMedias(token, logout, navigate) {
                 url: m.url,
                 description: m.description,
                 favorite: m.favorite || false,
-                playlistId: pl.id,     // id para controle interno
-                playlistName: pl.name  // nome para filtros e exibição
+                playlistId: pl.id,
+                playlistName: pl.name
               })
             );
           }
@@ -49,5 +48,34 @@ export function useLoadPlaylistsAndMedias(token, logout, navigate) {
     })();
   }, [token, logout, navigate]);
 
-  return { playlists, medias, setPlaylists, setMedias };
+  // Função para recarregar só as mídias, útil após adicionar nova mídia
+  async function reloadMedias() {
+    if (!token) return;
+
+    try {
+      const all = [];
+      for (const pl of playlists) {
+        const md = await fetchMediasByPlaylist(pl.name, token, logout);
+
+        if (Array.isArray(md)) {
+          md.forEach(m =>
+            all.push({
+              id: m._id || m.id,
+              title: m.title,
+              url: m.url,
+              description: m.description,
+              favorite: m.favorite || false,
+              playlistId: pl.id,
+              playlistName: pl.name
+            })
+          );
+        }
+      }
+      setMedias(all);
+    } catch (err) {
+      console.error("Erro ao recarregar mídias:", err);
+    }
+  }
+
+  return { playlists, medias, setPlaylists, setMedias, reloadMedias };
 }

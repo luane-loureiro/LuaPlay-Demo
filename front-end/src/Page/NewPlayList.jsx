@@ -26,7 +26,6 @@ export default function NewPlayList() {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      // Usando createPlaylist do playlistsService
       await createPlaylist(form, token, logout);
       toast.success('Playlist criada com sucesso!');
       navigate('/');
@@ -38,7 +37,7 @@ export default function NewPlayList() {
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <h1 className={styles.title}>Nova Playlist</h1>
+        <h1 className={styles.title}>Criar Nova Playlist</h1>
         <p className={styles.subtitle}>Preencha os campos abaixo</p>
 
         <TextInput

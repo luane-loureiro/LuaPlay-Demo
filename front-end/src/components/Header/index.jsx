@@ -12,9 +12,9 @@ export default function Header() {
     <nav className={styles.menu}>
       <div className={styles.logo}>
         <h2>
-          LuaPlay
-           <FaPlay className={styles.playIcon} />
-          </h2>
+          <span>LuaPlay</span>
+          <FaPlay className={styles.playIcon} />
+        </h2>
       </div>
       <ul className={styles.navLinks}>
         <li><MenuLink to="/" className={styles.navLink}>Home</MenuLink></li>

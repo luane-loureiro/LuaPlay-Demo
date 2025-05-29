@@ -5,6 +5,8 @@ import { toast } from 'react-toastify';
 import styles from './Signup.module.css';
 import { registerUser } from '../services/authService'; 
 import Button from '../components/ButtonGeneric';
+import { FaPlay } from "react-icons/fa";
+import TextInput from '../components/TextInput';
 
 export default function Signup() {
   const [form, setForm] = useState({ username: '', email: '', password: '' });
@@ -28,11 +30,19 @@ export default function Signup() {
   return (
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <h2 className={styles.logo}>LuaPlay</h2>
-        <p className={styles.subtitle}>Crie sua conta</p>
+        <h2 className={styles.logo}>
+          <span>LuaPlay</span>
+          <FaPlay className={styles.playIcon} />
+          <hr></hr>
+            
+        </h2>
 
+        <p className={styles.subtitle}>
+          Crie sua conta
+        </p>
+      <div className={styles.inputBox}>
         <label htmlFor="username" className={styles.label}>Nome</label>
-        <input
+        <TextInput
           id="username"
           name="username"
           type="text"
@@ -44,7 +54,7 @@ export default function Signup() {
         />
 
         <label htmlFor="email" className={styles.label}>E-mail</label>
-        <input
+        <TextInput
           id="email"
           name="email"
           type="email"
@@ -56,7 +66,7 @@ export default function Signup() {
         />
 
         <label htmlFor="password" className={styles.label}>Senha</label>
-        <input
+        <TextInput
           id="password"
           name="password"
           type="password"
@@ -68,7 +78,7 @@ export default function Signup() {
         />
 
         <Button type="submit" className={styles.button}>Cadastrar</Button>
-
+</div>
         <p className={styles.footerText}>
           Já tem uma conta?{' '}
           <Link to="/login" className={styles.link}>Faça login</Link>

@@ -21,31 +21,6 @@ p{
   align-items: center;
 }
 
-.addButton,
-.trashButton {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: white;
-}
-
-.addButton:hover {
-  color: #007BFF; 
-}
-
-.trashButton {
-  transition: color 0.3s ease;
-}
-
-.trashButton:hover {
-  color: #ff4d4f; 
-}
-
-.trashButton:focus {
-  outline: 2px solid #2271D1;
-  outline-offset: 2px;
-}
-
 /* Espaço entre a playlist e o carrossel */
 .carousel {
   margin-top: 1rem;

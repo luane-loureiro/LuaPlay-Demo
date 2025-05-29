@@ -1,4 +1,5 @@
 import styles from "./Button.module.css";
+import clsx from "clsx";
 
 export default function Button({
   children,
@@ -7,16 +8,22 @@ export default function Button({
   className = "",
   style,
   disabled = false,
-  ...rest // captura todas as outras props
+  variant = "default", 
+  ...rest
 }) {
   return (
     <button
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`${styles.button} ${className}`}
+      className={clsx(
+        styles.button,
+        variant === "playlist" && styles.playlistButton,
+        variant === "icon" && styles.iconButton,
+        className
+      )}
       style={style}
-      {...rest}  // passa todas as outras props aqui, incluindo aria-label
+      {...rest}
     >
       {children}
     </button>

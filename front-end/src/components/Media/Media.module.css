@@ -50,6 +50,11 @@
   height: 20px;
   object-fit: contain;
 }
+
+.buttons{
+display: flex;
+}
+
 .modalOverlay {
   position: fixed;
   top: 0;
@@ -92,3 +97,19 @@
 
 .favorito {
   fill: #e00; }
+
+  .spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ccc;
+  border-top: 2px solid #555;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

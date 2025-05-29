@@ -11,6 +11,8 @@ import Signup from './Page/Signup';
 import NewPlaylist from './Page/NewPlayList';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -26,6 +28,7 @@ function App() {
             <Route path="/newplaylist" element={<NewPlaylist />} />
             <Route path="*" element={<div>Página Não Encontrada</div>} />
           </Routes>
+           <ToastContainer position="top-right" autoClose={2000} />
         </div>
         <Footer />
       </div>

@@ -7,10 +7,12 @@
 }
 
 label {
-  display: block;
+  display: flex;
+  justify-content: flex-start;
   text-align: left;
-  margin-top: 1rem;
-  font-size: 0.9rem;
+  color: #fff;
+  margin: .5rem 0 0 0;
+  font-size: 1rem;
 }
 
 input {
@@ -18,17 +20,20 @@ input {
   padding: 0.5rem;
   display: block;
   align-self: center;
-  border: none;
-  border-radius: 0.5px;
+  border: 2px solid #333;
+  border-radius: 0.25rem;
   font-size: 1rem;
-  margin: 0.5rem 0;
-  background-color: #191919;
-  color: #a5a5a5;
+  padding: 10px;
+  margin: .5rem 0 1.5rem;
+  background-color: #fff;
+  color: #333;
   transition: border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease;
 }
 
 input:focus {
-  outline: 2px solid #e50914;
+  border: #e50914 solid 2px;
+  outline: none;
+  box-shadow: 0 0 1px #f40612, 0 0 5px #f40612, 0 0 20px #f40612;
 }
 
 /* Estilo para input com erro */
@@ -45,4 +50,15 @@ input:focus {
   margin-top: 0.25rem;
   font-weight: 600;
   display: block;
+}
+
+.colorInput{
+  padding: 0;
+  height: 2rem;
+}
+
+
+.input::placeholder {
+  color: #999;
+  opacity: 1; 
 }

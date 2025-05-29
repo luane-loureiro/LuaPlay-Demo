@@ -19,8 +19,7 @@ export default function Home() {
   const { token, logout } = useAuth();
   const navigate = useNavigate();
 
-  const { playlists, setPlaylists, medias, setMedias } = useLoadPlaylistsAndMedias(token, logout, navigate);
-
+  const { playlists, setPlaylists, medias, setMedias, reloadMedias } = useLoadPlaylistsAndMedias(token, logout, navigate);
   const {
     addMediaToPlaylist,
     deleteMedia,
@@ -57,26 +56,44 @@ export default function Home() {
   return (
     <section>
       {playlists.map(pl => (
-  <Playlist
-    key={pl.id}
-    playlist={pl}
-    color={pl.color}
-    mediaItems={medias.filter(m => m.playlistId === pl.id)}
-    onAddMedia={() => {
-      setPlaylistToAddMedia(pl);
-      setShowAddMediaModal(true);
-      setNewMediaTitle("");
-      setNewMediaUrl("");
-      setNewMediaDescription("");
-      setNewMediaCoverUrl("");
-      setNewMediaDuration("");
-    }}
-    onDeleteMedia={media => handleDeleteMedia(media, setMediaToDelete, setShowModalMedia)}
-    // Passando o objeto completo para pegar o favorite dentro do handler
-    onFavorite={media => handleToggleFavorite(media.id, token, logout, setMedias, toggleFavoriteMedia, media.favorite)}
-    onDeletePlaylist={() => handleDeletePlaylist(pl, setPlaylistToDelete, setShowModalPlaylist)}
-  />
-))}
+        <Playlist
+          key={pl.id}
+          playlist={pl}
+          color={pl.color}
+          mediaItems={medias.filter(m => m.playlistName === pl.name)}
+          onAddMedia={() => {
+            setPlaylistToAddMedia(pl);
+            setShowAddMediaModal(true);
+            setNewMediaTitle("");
+            setNewMediaUrl("");
+            setNewMediaDescription("");
+            setNewMediaCoverUrl("");
+            setNewMediaDuration("");
+          }}
+          onDeleteMedia={media =>
+            handleDeleteMedia(media, setMediaToDelete, setShowModalMedia)
+          }
+          onFavorite={media =>
+            handleToggleFavorite(
+              media.id,
+              token,
+              logout,
+              setMedias,
+              toggleFavoriteMedia,
+              media.favorite,
+              reloadMedias,
+              () => { } 
+            )
+          }
+          onDeletePlaylist={() =>
+            handleDeletePlaylist(
+              pl,
+              setPlaylistToDelete,
+              setShowModalPlaylist
+            )
+          }
+        />
+      ))}
 
       <DeletePlaylistModal
         isOpen={showModalPlaylist}
@@ -106,7 +123,8 @@ export default function Home() {
             logout,
             setMedias,
             setShowModalMedia,
-            setMediaToDelete
+            setMediaToDelete,
+            reloadMedias
           )
         }
       />
@@ -145,7 +163,8 @@ export default function Home() {
             setMedias,
             setShowAddMediaModal,
             setPlaylistToAddMedia,
-            addMediaToPlaylist
+            addMediaToPlaylist,
+            reloadMedias
           );
         }}
       />

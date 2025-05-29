@@ -13,14 +13,21 @@ export async function fetchMediasByPlaylist(playlistName, token, logout) {
 }
 
 /** Adiciona uma nova mídia a uma playlist. */
-export async function addMediaToPlaylist(mediaData, token, logout) {
-  return fetchWithAuth(
-    `/api/medias`,
-    { method: 'POST', body: JSON.stringify(mediaData) },
+export async function toggleFavoriteMediaApi(Id, newFavoriteValue, token, logout) {
+  return await fetchWithAuth(
+    `/api/medias/${Id}/favorite`,
+    {
+      method: "PATCH",
+     body: JSON.stringify({ favorite: newFavoriteValue }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    },
     token,
     logout
   );
 }
+
 
 /** Deleta uma mídia pelo título. */
 export async function deleteMedia(title, token, logout) {
@@ -47,16 +54,15 @@ export async function updateMedia(title, updates, token, logout) {
   );
 }
 
-/** Toggle favorito/desfavorito. */
-export async function toggleFavoriteMedia(mediaId, newFavoriteValue, token, logout) {
-  const url = `/api/medias/${encodeURIComponent(mediaId)}/favorite`;
-  console.log("Toggle favorite URL:", url, "Body:", { favorite: newFavoriteValue });
+/** Adiciona uma mídia a uma playlist pelo nome */
+export async function addMediaToPlaylist(mediaData, token, logout) {
+  const { playlistIdOrName, ...mediaFields } = mediaData;
 
-  return fetchWithAuth(
-    url,
+  return await fetchWithAuth(
+    `/api/playlists/${encodeURIComponent(playlistIdOrName)}/medias`,
     {
-      method: 'PATCH',
-      body: JSON.stringify({ favorite: newFavoriteValue }),
+      method: 'POST',
+      body: JSON.stringify(mediaFields),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -65,4 +71,3 @@ export async function toggleFavoriteMedia(mediaId, newFavoriteValue, token, logo
     logout
   );
 }
-

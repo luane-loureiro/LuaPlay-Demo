@@ -12,14 +12,23 @@ export default function TextInput({
   required = false,
   autoComplete = "off",
   error,
+  className = "", // 👈 adicionar aqui
 }) {
-  // Gera um ID confiável se não for passado
   const inputId = id || `input-${label.toLowerCase().replace(/\s+/g, "-")}`;
+
+  const inputClassName = [
+    styles.input,
+    type === "color" ? styles.colorInput : "",
+    error ? styles.errorInput : "",
+    className, // 👈 incluir classe vinda do componente pai
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <div className={styles.container}>
       {label && (
-        <label htmlFor={inputId}>
+        <label htmlFor={inputId} className={styles.label}>
           {label}
           {required && <span aria-hidden="true">*</span>}
         </label>
@@ -33,10 +42,10 @@ export default function TextInput({
         value={value}
         onChange={onChange}
         autoComplete={autoComplete}
-        className={error ? styles.errorInput : ""}
+        className={inputClassName}
         aria-invalid={error ? "true" : "false"}
         aria-describedby={error ? `${inputId}-error` : undefined}
-        data-testid={`textinput-${inputId}`} // Facilita testes
+        data-testid={`textinput-${inputId}`}
       />
       {error && (
         <span id={`${inputId}-error`} className={styles.errorMessage}>
