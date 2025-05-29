@@ -1,0 +1,21 @@
+services:
+  backend:
+    build:
+      context: ./back-end
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGO_URI=${MONGO_URI} 
+      - PORT=3000
+
+  frontend:
+    build:
+      context: ./front-end
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    # Variável de ambiente para garantir que Vite escute 0.0.0.0 e fique acessível
+    environment:
+      - VITE_HOST=0.0.0.0
+    command: [ "npm", "run", "dev" ]

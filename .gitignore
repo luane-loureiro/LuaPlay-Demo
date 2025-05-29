@@ -1,0 +1,39 @@
+#front-end/
+/front-end/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs
+logs/
+*.log
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Diretórios de build
+dist/
+build/
+
+# Ambiente
+.env
+.env.local
+.env.*.local
+
+# Editor / Sistema
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Docker
+docker-compose.override.yml
+
+# Test coverage
+coverage/
