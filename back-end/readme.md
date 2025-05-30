@@ -1,6 +1,8 @@
 # 🎵 LuaPlay - API de Playlists e Mídias
 
-Este é um projeto de back-end desenvolvido em Node.js com Express e MongoDB. Ele permite aos usuários criar, listar e gerenciar playlists e mídias de forma personalizada. A autenticação é baseada em usuários e cada playlist pertence exclusivamente a um usuário.
+Este é um projeto de back-end desenvolvido em Node.js com Express e MongoDB. 
+Ele permite aos usuários criar, listar e gerenciar playlists de forma personalizada.
+A autenticação é baseada em usuários e cada playlist pertence exclusivamente a um usuário.
 
 ---
 
@@ -104,24 +106,20 @@ Remove a playlist com o nome informado.
 ---
 
 ### Como rodar o projeto
-Clone o repositório:
+- Clone o repositório:
 
 ```
-Copiar
-Editar
 git clone https://github.com/seu-usuario/luaplay.git
 cd luaplay/back-end
 ```
 
-Instale as dependências:
+- Instale as dependências:
 
 ```
-Copiar
-Editar
 npm install`
 ```
 
-Configure o .env:
+- Configure o .env:
 
 ```
 MONGO_URI=mongodb://localhost:27017/luaplay
@@ -129,7 +127,7 @@ JWT_SECRET=sua_chave_secreta
 PORT=3000
 ```
  
-Rode a aplicação:
+- Rode a aplicação:
 
 ```
 npm run dev
