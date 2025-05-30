@@ -9,7 +9,7 @@ LuaPlay é uma aplicação fullstack desenvolvida para gerenciar e reproduzir pl
 
 ## 🚀 Tecnologias Utilizadas
 
-- **Frontend**: React, TypeScript, Styled-Components, React Icons
+- **Frontend**: React, JavaScript, Styled-Components, React Icons
 - **Backend**: Node.js, Express, MongoDB
 
 ---
