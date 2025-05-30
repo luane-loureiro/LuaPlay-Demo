@@ -1,9 +1,8 @@
-// fonrt-end/src/Page/Login.jsx
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { useAuth } from '../contexts/AuthContext';
 import { loginUser } from "../services/authService";
+import { loginHandler } from '../Handlers/AuthHandlers/';
 import Button from '../components/ButtonGeneric';
 import TextInput from '../components/TextInput';
 import styles from './Login.module.css';
@@ -17,27 +16,10 @@ export default function Login() {
     setForm(prev => ({ ...prev, [target.name]: target.value }));
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    const response = await loginUser(form); // ou sua função que chama o backend
-    console.log('Resposta login:', response);
-
-    const { token, user } = response; // aqui pega o user e token
-    const { username, email } = user; // username está dentro de user
-
-    login({
-      userData: { username, email }, // passa username, não name
-      token,
-    });
-
-    toast.success('Login realizado com sucesso!');
-    navigate('/');
-  } catch (err) {
-    toast.error('Falha no login: ' + (err.message || 'Erro inesperado'));
-  }
-};
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    loginHandler(form, login, navigate, loginUser);
+  };
 
   return (
     <div className={styles.container}>

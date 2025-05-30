@@ -158,6 +158,9 @@ template {
 [hidden] {
   display: none;
 }
+.padded {
+  padding-left: 2rem;
+}
 `
 
 export default EstilosGlobais

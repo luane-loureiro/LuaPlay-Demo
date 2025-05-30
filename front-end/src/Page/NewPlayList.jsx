@@ -5,7 +5,6 @@ import { toast } from 'react-toastify';
 import { useAuth } from '../contexts/AuthContext';
 import TextInput from '../components/TextInput';
 import Button from '../components/ButtonGeneric';
-// Importando da nova service de playlists
 import { createPlaylist } from '../services/playlistsService';
 import styles from './NewPlayList.module.css';
 

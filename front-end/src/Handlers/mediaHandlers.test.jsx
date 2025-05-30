@@ -1,16 +1,15 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
 import {
   handleToggleFavorite,
   handleDeleteMedia,
   confirmDeleteMedia,
-} from "../Handlers/mediaHandlers";
+} from "../Handlers/MediaHandlers"; 
 
 import {
   handleAddMediaToPlaylistById,
   handleDeletePlaylist,
   handleConfirmDeletePlaylist,
   handleConfirmAddMediaToPlaylist,
-} from "../Handlers/playlistHandlers";
+} from "../Handlers/PlaylistHandlers"; 
 
 import * as mediaService from "../services/mediaService";
 import * as playlistsService from "../services/playlistsService";

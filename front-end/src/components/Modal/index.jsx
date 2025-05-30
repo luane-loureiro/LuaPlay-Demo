@@ -2,7 +2,14 @@ import React, { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import styles from "./Modal.module.css";
 
-export default function Modal({ isOpen, onClose, title, children, footer, usePortal = true }) {
+export default function Modal({ 
+  isOpen, 
+  onClose, 
+  title, 
+  children, 
+  footer, 
+  usePortal = true 
+}) {
   const modalRef = useRef(null);
 
   useEffect(() => {

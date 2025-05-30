@@ -2,29 +2,21 @@ import React, { useEffect, useState } from "react";
 import styles from "./Media.module.css";
 import Button from "../ButtonGeneric";
 import classNames from "classnames";
+import { favoriteClickHandler } from "../../Handlers/MediaHandlers/index";
 
-import {
-  FaHeart,
-  FaRegHeart,
-  FaTrash,
-  FaPen,
+import { 
+  FaHeart, 
+  FaRegHeart, 
+  FaTrash, 
+  FaPen 
 } from "react-icons/fa";
 
-const defaultLoadYouTubeAPI = () => {
-  return new Promise((resolve) => {
-    if (window.YT && window.YT.Player) {
-      resolve(window.YT);
-    } else {
-      const tag = document.createElement("script");
-      tag.src = "https://www.youtube.com/iframe_api";
-      document.body.appendChild(tag);
+import {
+  getYoutubeId,
+  getEmbedUrl,
+  defaultLoadYouTubeAPI,
+} from "../../Utils/yutubeUtils";
 
-      window.onYouTubeIframeAPIReady = () => {
-        resolve(window.YT);
-      };
-    }
-  });
-};
 
 const Media = ({
   id,
@@ -46,38 +38,14 @@ const Media = ({
     [styles.favorito]: isFavorite,
   });
 
-  const handleFavoriteClick = async () => {
-    setLoadingFavorite(true);
-    try {
-      const newVal = !isFavorite;
-      setIsFavorite(newVal);
-      if (onFavorite) {
-        await onFavorite(id, newVal);
-      }
-    } catch (err) {
-      // Reverte em caso de erro
-      setIsFavorite((prev) => !prev);
-    } finally {
-      setLoadingFavorite(false);
-    }
-  };
-
-  const getYoutubeId = (u) => {
-    try {
-      const o = new URL(u);
-      if (o.hostname.includes("youtube.com") && o.searchParams.has("v"))
-        return o.searchParams.get("v");
-      if (o.hostname === "youtu.be") return o.pathname.slice(1);
-      return null;
-    } catch {
-      return null;
-    }
-  };
-
-  const getEmbedUrl = (u) => {
-    const videoId = getYoutubeId(u);
-    if (videoId) return `https://www.youtube.com/embed/${videoId}`;
-    return u;
+  const handleClick = () => {
+    favoriteClickHandler(
+      isFavorite,
+      setIsFavorite,
+      setLoadingFavorite,
+      onFavorite,
+      id
+    );
   };
 
   useEffect(() => {
@@ -111,9 +79,9 @@ const Media = ({
         <iframe
           src={getEmbedUrl(url)}
           title={title}
-          allow="accelerometer; autoplay; encrypted-media; picture-in-picture"
+          allow="accelerometer; autoplay; encrypted-media; picture-in-picture; presentation"
           allowFullScreen
-          sandbox="allow-scripts allow-same-origin"
+          sandbox="allow-scripts allow-same-origin allow-presentation"
           style={{ border: "none" }}
         />
         <div id={`yt-player-${id}`} style={{ display: "none" }} />
@@ -145,7 +113,7 @@ const Media = ({
           <Button
             variant="icon"
             aria-label="Adicionar aos favoritos"
-            onClick={handleFavoriteClick}
+            onClick={handleClick}
             type="button"
             disabled={loadingFavorite}
           >
