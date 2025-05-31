@@ -12,7 +12,7 @@ app.use(express.json());
 const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:3000',
-  'https://lua-play-frontend.onrender.com', // 🔁 Substitua pelo seu domínio real
+  'https://luaplay-frontend.onrender.com', 
 ];
 
 app.use(cors({
