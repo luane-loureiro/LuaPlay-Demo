@@ -1,43 +1,54 @@
+require('dotenv').config(); 
 console.log('NODE_ENV:', process.env.NODE_ENV);
-require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
 const { swaggerUi, specs } = require('./swagger');
 
 const app = express();
-app.use(express.json()); // Parse JSON
+app.use(express.json());
 
-// 2. CORS deve vir ANTES de qualquer rota ou middleware
-const allowedOrigins = ['http://localhost:5173', 'http://localhost:3000'];
+// CORS – Adicione URLs de produção aqui também
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'https://lua-play-frontend.onrender.com', // 🔁 Substitua pelo seu domínio real
+];
 
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
+      console.warn('CORS bloqueado para:', origin);
       callback(new Error('Not allowed by CORS'));
     }
   },
   credentials: true,
 }));
 
-// 3. Middleware de autenticação fake SOMENTE no ambiente de teste
+// Middleware de autenticação fake apenas no ambiente de teste
 if (process.env.NODE_ENV === 'test') {
   const fakeAuth = require('./src/middlewares/fakeAuth');
-  app.use(fakeAuth); // 👈 Ele precisa vir ANTES das rotas
+  app.use(fakeAuth);
 }
 
-// 4. Documentação
+// Swagger (documentação)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
-// 5. Rotas
+// Rotas
 const authRoutes = require('./src/routes/authRoutes');
 const playlistRoutes = require('./src/routes/playlistRoutes');
 const mediaRoutes = require('./src/routes/mediaRoutes');
 
 app.use('/auth', authRoutes);
-app.use('/api/playlists', playlistRoutes); // 👈 Esse usa o fakeAuth
+app.use('/api/playlists', playlistRoutes);
 app.use('/api/medias', mediaRoutes);
+
+// Middleware genérico para erros (ex: CORS, rotas inexistentes)
+app.use((err, req, res, next) => {
+  console.error('Erro:', err.message);
+  res.status(500).json({ error: err.message });
+});
 
 module.exports = app;

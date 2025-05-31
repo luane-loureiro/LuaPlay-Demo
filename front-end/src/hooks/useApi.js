@@ -1,3 +1,4 @@
+// src/hooks/useApi.js
 import { useAuth } from '../contexts/AuthContext';
 import * as mediaService from '../services/mediaService';
 
@@ -17,7 +18,7 @@ export function useApi() {
     updateMedia: (title, updates) =>
       mediaService.updateMedia(title, updates, token, logout),
 
-toggleFavoriteMedia: (id, newFavoriteValue) =>
-  mediaService.toggleFavoriteMediaApi(id, newFavoriteValue, token, logout),
+    toggleFavoriteMedia: (id, newFavoriteValue) =>
+      mediaService.toggleFavoriteMediaApi(id, newFavoriteValue, token, logout),
   };
 }

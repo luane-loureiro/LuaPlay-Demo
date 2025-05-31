@@ -1,42 +1,27 @@
-import { API_URL } from './config';  // <-- IMPORTAÇÃO ESSENCIAL
-
+// src/services/apiClient.js
 export async function fetchWithAuth(endpoint, options = {}, token, logout) {
-  const fullUrl = `${API_URL}${endpoint}`;
-  console.log("🚀 AQUI!!!!! [fetchWithAuth] Full URL:", fullUrl); // <-- AQUI
+  const baseUrl = import.meta.env.VITE_API_BASE;
 
-  const headers = {
-    ...(options.headers || {}),
-  };
+  const response = await fetch(`${baseUrl}${endpoint}`, {
+    ...options,
+    headers: {
+      ...options.headers,
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
-  // Sempre setar Content-Type se houver body, independente do tipo
-  if (options.body) {
-    headers['Content-Type'] = 'application/json';
+  // Se o token expirou ou inválido
+  if (response.status === 401) {
+    logout?.();
+    throw new Error('Não autorizado. Token inválido ou expirado.');
   }
 
-  if (token) {
-    headers['Authorization'] = `Bearer ${token}`;
+  // Se houver erro, lança exceção
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.message || 'Erro na requisição');
   }
 
-  try {
-    const response = await fetch(fullUrl, {
-      ...options,
-      headers,
-    });
-
-    if (response.status === 401) {
-      console.warn('Token inválido ou expirado. Realizando logout...');
-      if (typeof logout === 'function') logout();
-      throw new Error('Não autorizado (401)');
-    }
-
-    if (!response.ok) {
-      const errData = await response.json().catch(() => ({ message: 'Erro desconhecido' }));
-      throw new Error(errData.message || 'Erro desconhecido');
-    }
-
-    return response.json();
-  } catch (err) {
-    console.error('Erro em fetchWithAuth:', err.message);
-    throw err;
-  }
+  // Retorna JSON ou vazio
+  return response.status === 204 ? null : response.json();
 }
